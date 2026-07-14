@@ -1,0 +1,105 @@
+<section id="photolium-settings" class="photolium-settings-block">
+    <div class="photolium-settings-heading">
+        <div>
+            <h3><i class="fa-solid fa-camera-retro"></i> Photolium</h3>
+            <p>감정 초상화와 문단 타이핑을 사용하는 선택형 대화 모드</p>
+        </div>
+        <button type="button" class="menu_button photolium-open-button" data-photolium-action="enter">
+            <i class="fa-solid fa-expand"></i> Photolium 열기
+        </button>
+    </div>
+
+    <div class="photolium-profile-note">
+        현재 대상: <strong id="photolium-profile-name">채팅을 먼저 여세요</strong>
+        <span>이미지 파일은 SillyTavern의 사용자 이미지 폴더에 저장됩니다.</span>
+    </div>
+
+    <div class="photolium-settings-grid">
+        <div class="photolium-setting-card">
+            <h4><i class="fa-regular fa-images"></i> 감정 이미지</h4>
+            <div id="photolium-image-list" class="photolium-image-list"></div>
+            <label class="menu_button photolium-file-button">
+                <i class="fa-solid fa-plus"></i> 이미지 추가
+                <input id="photolium-emotion-input" type="file" accept="image/png,image/jpeg,image/webp,image/gif,image/bmp" multiple hidden>
+            </label>
+            <small>파일명이 AI가 출력할 태그가 됩니다. 예: <code>[happy.png]</code></small>
+        </div>
+
+        <div class="photolium-setting-card">
+            <h4><i class="fa-regular fa-image"></i> 장면 배경</h4>
+            <div id="photolium-background-preview" class="photolium-background-preview">기본 SillyTavern 배경 사용</div>
+            <div class="photolium-inline-actions">
+                <label class="menu_button photolium-file-button">
+                    <i class="fa-solid fa-folder-open"></i> 배경 선택
+                    <input id="photolium-background-input" type="file" accept="image/png,image/jpeg,image/webp,image/gif,image/bmp" hidden>
+                </label>
+                <button type="button" class="menu_button" data-photolium-action="remove-background">배경 제거</button>
+            </div>
+            <label>배경 맞춤
+                <select class="text_pole" data-photolium-setting="backgroundFit">
+                    <option value="cover">채우기</option>
+                    <option value="contain">전체 보기</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="photolium-setting-card">
+            <h4><i class="fa-solid fa-wand-magic-sparkles"></i> 대화 연출</h4>
+            <label class="checkbox_label"><input type="checkbox" data-photolium-setting="promptEnabled"> AI 감정 태그 자동 지시</label>
+            <label class="checkbox_label"><input type="checkbox" data-photolium-setting="typingEnabled"> 문단별 타이핑 효과</label>
+            <label class="checkbox_label"><input type="checkbox" data-photolium-setting="portraitFadeEnabled"> 초상화 페이드 전환</label>
+            <label>타이핑 속도 <output data-photolium-output="typingSpeed"></output>
+                <input type="range" min="5" max="120" step="1" data-photolium-setting="typingSpeed">
+            </label>
+            <label>문단 사이 대기 <output data-photolium-output="paragraphDelay"></output>
+                <input type="range" min="0" max="2000" step="50" data-photolium-setting="paragraphDelay">
+            </label>
+            <label>글자 크기 <output data-photolium-output="fontSize"></output>
+                <input type="range" min="14" max="42" step="1" data-photolium-setting="fontSize">
+            </label>
+            <label>초상화 너비 <output data-photolium-output="portraitWidth"></output>
+                <input type="range" min="25" max="55" step="1" data-photolium-setting="portraitWidth">
+            </label>
+            <label>초상화 맞춤
+                <select class="text_pole" data-photolium-setting="portraitFit">
+                    <option value="contain">전체 보기</option>
+                    <option value="cover">채우기</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="photolium-setting-card">
+            <h4><i class="fa-solid fa-palette"></i> 자유 테마</h4>
+            <label>프리셋
+                <select class="text_pole" id="photolium-preset">
+                    <option value="daylight">포토리움 라이트</option>
+                    <option value="cottage">포근한 코티지</option>
+                    <option value="rose">로즈티 살롱</option>
+                    <option value="lavender">라벤더 드림</option>
+                    <option value="midnight">별빛 밤</option>
+                    <option value="parchment">따뜻한 양피지</option>
+                    <option value="glass">유리 정원</option>
+                    <option value="minimal">미니멀</option>
+                    <option value="custom">사용자 설정</option>
+                </select>
+            </label>
+            <div class="photolium-theme-fields">
+                <label>강조색 <input class="text_pole" data-photolium-theme="accent"></label>
+                <label>패널색 <input class="text_pole" data-photolium-theme="panel"></label>
+                <label>대화창 <input class="text_pole" data-photolium-theme="bubble"></label>
+                <label>글자색 <input class="text_pole" data-photolium-theme="text"></label>
+                <label>보조 글자 <input class="text_pole" data-photolium-theme="muted"></label>
+                <label>화면 오버레이 <input class="text_pole" data-photolium-theme="backdrop"></label>
+            </div>
+            <label>모서리 둥글기 <output data-photolium-output="theme.radius"></output>
+                <input type="range" min="0" max="48" step="1" data-photolium-theme="radius">
+            </label>
+            <label>배경 어둡기 <output data-photolium-output="backgroundDim"></output>
+                <input type="range" min="0" max="80" step="1" data-photolium-setting="backgroundDim">
+            </label>
+            <label>배경 흐림 <output data-photolium-output="backgroundBlur"></output>
+                <input type="range" min="0" max="20" step="1" data-photolium-setting="backgroundBlur">
+            </label>
+        </div>
+    </div>
+</section>

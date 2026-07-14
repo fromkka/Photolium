@@ -1,0 +1,13 @@
+{
+    "display_name": "Photolium",
+    "loading_order": 120,
+    "requires": [],
+    "js": "index.js",
+    "css": "style.css",
+    "author": "Photolium contributors",
+    "version": "1.0.0",
+    "minimum_client_version": "1.12.0",
+    "hooks": {
+        "activate": "init"
+    }
+}

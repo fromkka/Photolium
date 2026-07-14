@@ -1,0 +1,135 @@
+<div id="photolium-app" aria-hidden="true">
+    <div class="photolium-scene-background"></div>
+    <div class="photolium-scene-shade"></div>
+
+    <main class="photolium-shell" role="dialog" aria-modal="true" aria-label="Photolium 대화 모드">
+        <header class="photolium-topbar">
+            <div class="photolium-brand-block">
+                <div class="photolium-logo"><i class="fa-solid fa-camera-retro"></i></div>
+                <div>
+                    <div class="photolium-brand">Photolium</div>
+                    <p>감정에 따라 초상화가 바뀌고, 문단별 타이핑으로 대화가 이어집니다.</p>
+                </div>
+            </div>
+            <div class="photolium-top-actions">
+                <button type="button" data-photolium-action="exit" title="기본 채팅으로 나가기">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i><span> 기본 채팅</span>
+                </button>
+            </div>
+        </header>
+
+        <section class="photolium-stage">
+            <aside class="photolium-portrait-pane">
+                <div class="photolium-pane-title"><i class="fa-regular fa-image"></i><strong>현재 초상화</strong></div>
+                <div class="photolium-portrait-card">
+                    <div class="photolium-portrait-frame">
+                        <img id="photolium-portrait" class="photolium-portrait-layer photolium-portrait-current" alt="">
+                        <img id="photolium-portrait-next" class="photolium-portrait-layer photolium-portrait-next" alt="" aria-hidden="true">
+                        <div class="photolium-portrait-placeholder"><i class="fa-regular fa-user"></i></div>
+                    </div>
+                    <div class="photolium-nameplate">
+                        <strong id="photolium-character-name"></strong>
+                        <span id="photolium-portrait-label"></span>
+                    </div>
+                </div>
+
+                <section class="photolium-stage-assets">
+                    <div class="photolium-pane-title">
+                        <i class="fa-regular fa-images"></i><strong>감정 이미지 목록</strong>
+                        <span id="photolium-stage-image-count" class="photolium-count-badge">0개</span>
+                    </div>
+                    <div id="photolium-stage-image-list" class="photolium-stage-image-list"></div>
+                    <label class="photolium-secondary-button">
+                        <i class="fa-solid fa-plus"></i> 이미지 추가
+                        <input id="photolium-stage-emotion-input" type="file" accept="image/png,image/jpeg,image/webp,image/gif,image/bmp" multiple hidden>
+                    </label>
+                </section>
+            </aside>
+
+            <section class="photolium-conversation-pane">
+                <div class="photolium-pane-header">
+                    <div class="photolium-pane-title"><i class="fa-regular fa-comment-dots"></i><strong>AI와의 대화</strong></div>
+                    <label class="photolium-switch-line">감정 태그 자동 전환
+                        <input type="checkbox" data-photolium-setting="promptEnabled">
+                        <span class="photolium-switch"></span>
+                    </label>
+                </div>
+                <div id="photolium-dialogue" class="photolium-dialogue" aria-live="polite"></div>
+                <div id="photolium-status" class="photolium-status" hidden><i class="fa-solid fa-ellipsis"></i> 답변을 기다리는 중</div>
+
+                <div class="photolium-composer">
+                    <textarea id="photolium-textarea" rows="2" placeholder="메시지를 입력하세요…"></textarea>
+                    <button id="photolium-send" type="button" title="보내기 · 빈 입력이면 AI 다시 호출"><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+                <small class="photolium-skip-hint">Enter 전송 · 빈 입력에서 전송 버튼을 누르면 AI 재호출 · 출력 중 대화창 클릭 시 현재 문단 즉시 표시</small>
+            </section>
+
+            <aside class="photolium-control-pane">
+                <section class="photolium-control-card">
+                    <div class="photolium-card-heading"><i class="fa-solid fa-gear"></i><h2>설정</h2></div>
+                    <div class="photolium-theme-picker" aria-label="UI 테마 선택">
+                        <button type="button" data-photolium-action="theme-preset" data-preset="cottage"><i></i><span>코티지</span></button>
+                        <button type="button" data-photolium-action="theme-preset" data-preset="daylight"><i></i><span>데이라이트</span></button>
+                        <button type="button" data-photolium-action="theme-preset" data-preset="rose"><i></i><span>로즈티</span></button>
+                        <button type="button" data-photolium-action="theme-preset" data-preset="lavender"><i></i><span>라벤더</span></button>
+                    </div>
+                    <label class="photolium-control-row">
+                        <span><strong>문단별 타이핑</strong><small>답변을 문단 단위로 표시합니다.</small></span>
+                        <input type="checkbox" data-photolium-setting="typingEnabled">
+                        <span class="photolium-switch"></span>
+                    </label>
+                    <label class="photolium-control-row">
+                        <span><strong>감정 초상화 자동 전환</strong><small>등록한 파일명만 AI에게 알려줍니다.</small></span>
+                        <input type="checkbox" data-photolium-setting="promptEnabled">
+                        <span class="photolium-switch"></span>
+                    </label>
+                    <label class="photolium-control-row">
+                        <span><strong>초상화 페이드 전환</strong><small>표정이 바뀔 때 부드럽게 전환합니다.</small></span>
+                        <input type="checkbox" data-photolium-setting="portraitFadeEnabled">
+                        <span class="photolium-switch"></span>
+                    </label>
+                    <div class="photolium-slider-row">
+                        <div><strong>타이핑 속도</strong><output data-photolium-output="typingSpeed"></output></div>
+                        <input type="range" min="5" max="120" step="1" data-photolium-setting="typingSpeed">
+                        <div class="photolium-range-legend"><span>느림</span><span>빠름</span></div>
+                    </div>
+                    <div class="photolium-slider-row">
+                        <div><strong>문단 간 딜레이</strong><output data-photolium-output="paragraphDelay"></output></div>
+                        <input type="range" min="0" max="2000" step="50" data-photolium-setting="paragraphDelay">
+                        <div class="photolium-range-legend"><span>즉시</span><span>2000ms</span></div>
+                    </div>
+                    <div class="photolium-slider-row">
+                        <div><strong>글자 크기</strong><output data-photolium-output="fontSize"></output></div>
+                        <input type="range" min="14" max="42" step="1" data-photolium-setting="fontSize">
+                    </div>
+                    <div class="photolium-background-picker">
+                        <div class="photolium-background-picker-heading">
+                            <span><strong>장면 배경</strong><small>기본 배경을 고르거나 내 사진을 불러옵니다.</small></span>
+                            <button type="button" class="photolium-plain-button" data-photolium-action="remove-background">기본으로</button>
+                        </div>
+                        <div id="photolium-background-presets" class="photolium-background-presets"></div>
+                        <label class="photolium-secondary-button photolium-background-upload">
+                            <i class="fa-regular fa-folder-open"></i> 사진 불러오기
+                            <input id="photolium-stage-background-input" type="file" accept="image/png,image/jpeg,image/webp,image/gif,image/bmp" hidden>
+                        </label>
+                    </div>
+                </section>
+
+                <section class="photolium-control-card photolium-flow-card">
+                    <div class="photolium-card-heading"><i class="fa-solid fa-list-check"></i><h2>작동 흐름</h2></div>
+                    <ol class="photolium-flow-list">
+                        <li><span>1</span><i class="fa-solid fa-robot"></i><div><strong>AI 답변 생성</strong><small>현재 캐릭터의 답변을 생성합니다.</small></div></li>
+                        <li><span>2</span><i class="fa-solid fa-tag"></i><div><strong>태그 감지</strong><small>문단 첫 줄의 이미지 태그를 찾습니다.</small></div></li>
+                        <li><span>3</span><i class="fa-regular fa-image"></i><div><strong>초상화 교체</strong><small>파일명과 일치하는 초상화로 바꿉니다.</small></div></li>
+                        <li><span>4</span><i class="fa-regular fa-comment-dots"></i><div><strong>문단별 타이핑 표시</strong><small>대사를 순서대로 타이핑합니다.</small></div></li>
+                    </ol>
+                </section>
+            </aside>
+        </section>
+
+        <footer class="photolium-footer">
+            <span><i class="fa-solid fa-circle"></i> 준비됨</span>
+            <span>감정이 바뀔 때마다 대화가 더 생생해집니다.</span>
+        </footer>
+    </main>
+</div>
